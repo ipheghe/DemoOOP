@@ -1,86 +1,116 @@
-// Define a class called animal
-class Animal {
-    constructor(name) {
-        this.name = name;
-    }
 
-    get animal_name(){
-        
-        return this.name;
-    }
+'use strict';
+
+(function(exports) {
+
+// Define an ArithemeticSuperClass constructor
+var ArithemeticSuperClass = function(firstNumber, secondNumber) {
     
-    get animal_sound(){
-        
-        //ENCAPSULATON happens here..
-        //the variable object sound cannot be accessed from the outside
-        //but the method animal_sound can be accessed and return the value of the object variable sound
-        var sound = "hiss";
-        return this.sound;
+    if (typeof(firstNumber && secondNumber) !== 'number') {
+            
+            return 'undefined';
+            
+    }else{
+        this.firstNumber = firstNumber || 22;
+        this.secondNumber = secondNumber;
     }
 
-    move() {
-        return "walks";
-    }
-}
+};
+ exports.ArithemeticSuperClass = ArithemeticSuperClass;
 
+//generic method to get sum of numbers
+ArithemeticSuperClass.prototype.getSum = function(){
+    return this.firstNumber + this.secondNumber;
+};
 
-// INHERITANCE
-// Define class Mammal which extends Animal
-// Mammal inherits from the Animal class
-class Mammal extends Animal {
-    territory() {
-        return "Terrestrial";
-    }
-    
-}
+//generic method to get difference of numbers
+ArithemeticSuperClass.prototype.getDifference= function(){
+    return this.firstNumber - this.secondNumber;
+};
 
+//generic method to get product of numbers
+ArithemeticSuperClass.prototype.getProduct = function(){
+    return this.firstNumber * this.secondNumber;
+};
 
-// POLYMORPHISM
-// Define a Reptile class which extends Animal
-class Reptile extends Animal {
+//generic method to get quotient of numbers
+ArithemeticSuperClass.prototype.getQuotient = function(){
+    return this.firstNumber / this.secondNumber;
+};
 
-    // This is an example of polymorphism. The Reptile Class's
-    // "move()" method overrides that of the Animal Class
-    move() {
-        return "crawls";
-    }
-}
-
-var bingo = new Mammal("Dog");
-bingo.territory();
-bingo.name; // Inheritance
-
-var shirley = new Reptile("Snake")
-shirley.move() // Polymorphism
-shirley.animal_name;// Encapsulation
-
+//generic method to get quotient of numbers
+ArithemeticSuperClass.prototype.getQuotient = function(){
+    return this.firstNumber / this.secondNumber;
+};
 
 //COMPOSITION
 //COMPOSITION is how we express all our “has a” relationships
-//dog is the object and contains properties name,breed and more
-//collar is a property of dog and collar has its own properties like color and shape
+//newNumber is the object and contains properties firstNumber,secondNumber and thirdNumber
+//numberObject is a property of newNumber and has its own properties like x and y
 //Also OBJECTS can have properties and methods.
-const  dog = {
-  name : 'Max', // This is a PROPERTY
-  breed : 'Collie',
-  yearOfBirth: 2014,
-  collar : {
-    color : 'blue',
-    shape : 'pendant'
-  },
-  tail : {
-    length : {
-      value : 20,
-      unit : 'cm'
-    },
-    status : 'wagging'
-  },
- calculateAge: function() {  //This is a METHOD
-    return 2016 - this.yearOfBirth;
+var newNumber = {
+        
+firstNumber: 1,
+secondNumber: 2,
+thirdNumber: 3,
+numberObject: {
+            
+        x: 1,
+        y: 2
     }
+            
+ }
+
+//generic method to get quotient of numbers
+ArithemeticSuperClass.prototype.getAverage = function(){
+    
+    //ENCAPSULATION
+    //the variable object x cannot be accessed from the outside
+    //but the method getAverage can be accessed and return the value of the function
+    var x = 2;
+    return (this.firstNumber / this.secondNumber) / x; //ABSTRACTION happens here because the its only the return value that can be accessed from the outside
 };
 
-dog;// Composition
-dog.calculateAge();// This calls the method of the object
 
+// Define the Arithemetic constructor
+function Arithemetic(firstNumber, secondNumber) {
+  // Call the parent constructor, making sure (using Function#call)
+  // that "this" is set correctly during the call
+  ArithemeticSuperClass.call(this, firstNumber,secondNumber);
+
+  // Initialize our Student-specific properties
+  //this.subject = subject;
+};
+
+// INHERITANCE
+// Create a Arithemetic.prototype object that inherits from ArithemeticSuperClass.prototype.
+// Note: A common error here is to use "new ArithemeticSuperClass()" to create the
+// Arithemetic.prototype. That's incorrect for several reasons, not least 
+// that we don't have anything to give ArithemeticSuperClass for the "firstNumber" and "secondNumber" 
+// argument. The correct place to call ArithemeticSuperClass is above, where we call 
+// it from Arithemetic.
+Arithemetic.prototype = Object.create(ArithemeticSuperClass.prototype); // See note below
+
+// Set the "constructor" property to refer to Arithemetic
+ Arithemetic.prototype.constructor = Arithemetic;
+
+// Replace the "getProduct" method
+Arithemetic.prototype.getProduct = function(){
+    
+   return "The result is equal to " + this.firstNumber * this.secondNumber;
+    
+};
+
+var array = [];
+
+// Example usage:
+var newObject = new Arithemetic(2,3);
+array.push(newObject.getSum());//INHERITANCE
+array.push(newObject.getDifference());//INHERITANCE
+array.push(newObject.getProduct());//POLYMORPHISM
+array.push(newObject.getQuotient());//INHERITANCE
+array.push(newObject.getAverage());//ENCAPSULATION & ABSTRACTION
+array;
+
+});
 

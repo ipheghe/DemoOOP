@@ -1,0 +1,29 @@
+{
+  "name": "demo-oop",
+  "version": "1.0.0",
+  "description": "A simple app showing all the usage of OOP conepts",
+  "main": "src/main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipheghe/DemoOOP.git"
+  },
+  "keywords": [
+    "OOP"
+  ],
+  "author": "Ovie Ipheghe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ipheghe/DemoOOP/issues"
+  },
+  "homepage": "https://github.com/ipheghe/DemoOOP#readme",
+  "dependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
+  }
+}
